@@ -3,28 +3,28 @@
 #include <assert.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-CTimer::CTimer() :
-	m_autoRestartDelayTimeMS( 0 ),
-	m_delayTimeMS( 0 ),
-	m_startTimeMS( 0 ),
+CTimer::CTimer( const bool bIsMilliseconds ) :
+	m_delayTime( 0 ),
+	m_startTime( 0 ),
 	m_bIsWorking( false ),
-	m_bIsAutoRestarted( false )
+	m_bIsAutoRestarted( false ),
+	m_bIsMilliseconds( bIsMilliseconds )
 {}
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-CTimer::CTimer( const unsigned long autoRestartDelayTimeMS ) :
-	m_autoRestartDelayTimeMS( autoRestartDelayTimeMS ),
-	m_delayTimeMS( 0 ),
-	m_startTimeMS( millis() ),
-	m_bIsWorking( true ),
-	m_bIsAutoRestarted( true )
-{}
-////////////////////////////////////////////////////////////////////////////////////////////////////
-void CTimer::Start( const unsigned long timeMS )
+void CTimer::Start( const unsigned long delayTime, const bool isRepeatedly )
 {
-	assert( !m_bIsAutoRestarted );
-
-	m_delayTimeMS = timeMS;
-	m_startTimeMS = millis();
+	m_delayTime = delayTime;
+	if( m_bIsMilliseconds )
+		m_startTime = millis();
+	else
+		m_startTime = micros();
+	m_bIsAutoRestarted = isRepeatedly;
+	m_bIsWorking = true;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void CTimer::Stop()
+{
+	m_bIsWorking = false;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 bool CTimer::IsReady()
@@ -32,16 +32,15 @@ bool CTimer::IsReady()
 	if( !m_bIsWorking )
 		return false;
 
-	const unsigned long thisTimeMS = millis();
-	const unsigned long deltaTimeMS = thisTimeMS - m_startTimeMS;
-
-	const unsigned long actualDelay = m_bIsAutoRestarted ? m_autoRestartDelayTimeMS : m_delayTimeMS;
-	if( deltaTimeMS > actualDelay )
+	const unsigned long thisTime = m_bIsMilliseconds ? millis() : micros();
+	const unsigned long deltaTime = thisTime - m_startTime;
+	if( deltaTime > m_delayTime )
 	{
 		if( m_bIsAutoRestarted )
-			m_startTimeMS = thisTimeMS;
+			m_startTime = thisTime;
 		else
 			m_bIsWorking = false;
+
 		return true;
 	}
 

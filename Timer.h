@@ -8,19 +8,18 @@
 class CTimer
 {
 public:
-	CTimer();
-	CTimer( const unsigned long autoRestartDelayTimeMS );
-	
+	CTimer( const bool bIsMilliseconds );
 
-	void	Start( const unsigned long timeMS );
+	void	Start( const unsigned long delayTime, const bool isRepeatedly );
+	void	Stop();
 	bool	IsReady();
 private:
 
-	const unsigned long	m_autoRestartDelayTimeMS;
-	unsigned long		m_delayTimeMS;
-	unsigned long		m_startTimeMS;
+	unsigned long		m_delayTime;
+	unsigned long		m_startTime;
 	bool				m_bIsWorking;
-	const bool			m_bIsAutoRestarted;
+	bool				m_bIsAutoRestarted;
+	const bool 			m_bIsMilliseconds;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif
