@@ -24,7 +24,7 @@ void CSevenSegmentDisplay::DrawInteger( const int value )
 	}
 
 	// Remove leading zero
-	for( byte i = 0; i < 4; ++i )
+	for( byte i = 0; i < 3; ++i )
 		if( 0 == digit[i] )
 			digit[i] = CSevenSegDisp3461BS::EMPTY;
 		else
