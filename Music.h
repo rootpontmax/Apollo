@@ -104,6 +104,40 @@ struct SMusicNote
 	unsigned int part;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+SMusicNote g_tocattaBach[] =
+{
+	SMusicNote( NOTE_A5, 4 ),
+	SMusicNote( NOTE_G5, 4 ),
+	SMusicNote( NOTE_A5, 4 ), 
+	SMusicNote( 0, 4 ),
+	SMusicNote( NOTE_G5, 12 ),
+	SMusicNote( NOTE_F5, 12 ),
+	SMusicNote( NOTE_E5, 12 ),
+	SMusicNote( NOTE_D5, 12 ),
+	SMusicNote( NOTE_CS5, 4 ),
+	SMusicNote( NOTE_D5, 4 ),
+	SMusicNote( 0, 2 ),
+	SMusicNote( NOTE_A4, 4 ),
+	SMusicNote( NOTE_G4, 4 ),
+	SMusicNote( NOTE_A4, 4 ),
+	SMusicNote( 0, 4 ),
+	SMusicNote( NOTE_E4, 4 ),
+	SMusicNote( NOTE_F4, 4 ),
+	SMusicNote( NOTE_CS4, 4 ),
+	SMusicNote( NOTE_D4, 4 ),
+	SMusicNote( 0, 2 ),
+	SMusicNote( NOTE_A3, 4 ),
+	SMusicNote( NOTE_G3, 4 ),
+	SMusicNote( NOTE_A3, 4 ),
+	SMusicNote( 0, 4 ),
+	SMusicNote( NOTE_G3, 12 ),
+	SMusicNote( NOTE_F3, 12 ),
+	SMusicNote( NOTE_E3, 12 ),
+	SMusicNote( NOTE_D3, 12 ),
+	SMusicNote( NOTE_CS3, 4 ),
+	SMusicNote( NOTE_D3, 4 )
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
 class CMusic
 {
 public:

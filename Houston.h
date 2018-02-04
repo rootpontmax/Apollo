@@ -1,31 +1,29 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// Class for buzzer.																		      //
+// Class for receiver application.                                                                //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifndef BUZZER_H
-#define BUZZER_H
+#ifndef HOUSTON_H
+#define HOUSTON_H
 
-#include "Arduino.h"
+#include "Display.h"
 #include "Timer.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-class CBuzzer
+class CHouston
 {
 public:
-	CBuzzer( const int pin );
+    CHouston();
+    void Init();
+    void Tick();
 
-	void	Play( const byte pwmCoef, const unsigned long durationUS );
-	void	Stop();
-	void	Tick();
-	
 private:
 
-	CTimer			m_durationTimer;
+    void    MeasureFPS();
 
-	const int		m_pin;
-	unsigned long	m_halfPeriodUS;
-	bool			m_bIsWorking;
-	bool			m_bIsUnderPower;
+    CDisplay    m_display;
+    CTimer      m_fpsTimer;
+    int         m_cyclesCount;
+    int         m_fps;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#endif
 
+#endif

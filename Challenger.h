@@ -1,31 +1,18 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// Class for buzzer.																		      //
+// Class for transmitter application.                                                             //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifndef BUZZER_H
-#define BUZZER_H
-
-#include "Arduino.h"
-#include "Timer.h"
+#ifndef CHALLENGER_H
+#define CHALLENGER_H
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-class CBuzzer
+class CChallenger
 {
 public:
-	CBuzzer( const int pin );
+    void Init();
+    void Tick();
 
-	void	Play( const byte pwmCoef, const unsigned long durationUS );
-	void	Stop();
-	void	Tick();
-	
 private:
-
-	CTimer			m_durationTimer;
-
-	const int		m_pin;
-	unsigned long	m_halfPeriodUS;
-	bool			m_bIsWorking;
-	bool			m_bIsUnderPower;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#endif
 
+#endif

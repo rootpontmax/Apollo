@@ -1,4 +1,5 @@
 #include "SevenSegmentDisplay.h"
+#include <assert.h>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 CSevenSegmentDisplay::CSevenSegmentDisplay( const int pinSCLK, const int pinRCLE, const int pinDIO ) :
@@ -31,6 +32,21 @@ void CSevenSegmentDisplay::DrawInteger( const int value )
 			break;
 
 	m_impl.DrawDigits( digit[0], digit[1], digit[2], digit[3] );
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
+void CSevenSegmentDisplay::DrawFloat( const float value, const byte digitsAfterDecimalPoint )
+{
+	assert( digitsAfterDecimalPoint <= 4 );
+
+	const float multiplier = pow( 10, digitsAfterDecimalPoint );
+	const int intValue = static_cast< int >( value * multiplier );
+	DrawInteger( intValue );
+	if( digitsAfterDecimalPoint > 0 )
+	{
+		bool bHasPoint[4] = { false, false, false, false };
+		bHasPoint[3 - digitsAfterDecimalPoint] = true;
+		m_impl.DrawDots( bHasPoint[0], bHasPoint[1], bHasPoint[2], bHasPoint[3] );
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 void CSevenSegmentDisplay::Tick()

@@ -13,6 +13,7 @@ public:
 	CSevenSegmentDisplay( const int pinSCLK, const int pinRCLE, const int pinDIO );
 
 	void	DrawInteger( const int value );
+	void	DrawFloat( const float value, const byte digitsAfterDecimalPoint );
 	void	Tick();
 
 private:

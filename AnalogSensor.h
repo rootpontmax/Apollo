@@ -1,30 +1,22 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// Class for buzzer.																		      //
+// Class for simple analog sensor.																  //
+// For voltage: 5:1 voltage divider using a 30K and a 7.5K Ohm resistor.						  //
+// For current: ACS712.																			  //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-#ifndef BUZZER_H
-#define BUZZER_H
-
-#include "Arduino.h"
-#include "Timer.h"
+#ifndef ANALOG_SENSOR_H
+#define ANALOG_SENSOR_H
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-class CBuzzer
+class CAnalogSensor
 {
 public:
-	CBuzzer( const int pin );
+	CAnalogSensor( const int pin );
+	float	GetVoltage() const;
+	float 	GetCurrent() const;
 
-	void	Play( const byte pwmCoef, const unsigned long durationUS );
-	void	Stop();
-	void	Tick();
-	
 private:
 
-	CTimer			m_durationTimer;
-
-	const int		m_pin;
-	unsigned long	m_halfPeriodUS;
-	bool			m_bIsWorking;
-	bool			m_bIsUnderPower;
+	const int	m_pin;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif
